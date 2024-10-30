@@ -5,8 +5,8 @@
 <meta name="author" content="Pol Flórez Viciana" >
 <meta name="owner" content="Pol Flórez Viciana" >
 <meta name="keywords" content="" >
-<title></title>
-<meta name="description" content="" >
+<title>App Convertir a Binario el Decimal y el Decimal a Binario</title>
+<meta name="description" content="Convertir de Binario a Decimal y de Decimal a Binario con un clic." >
 <meta name="robots" content="index, dofollow" >
 <style>
 	body {
@@ -69,16 +69,23 @@
 <script>
 function ConvertirBinario(){
 	var Texto = document.getElementById("ElInput").value;	
-	alert( NumeroABinario(Texto) );
+	alert( DeNumeroABinario(Texto) );
 }
 function ConvertirDecimal(){     
 	var Texto = document.getElementById("ElInput").value;	
-	alert( BinarioANumero(Texto) );
+	alert( DeBinarioANumero(Texto) );
 }
-function NumeroABinario(Numero){
+// Funciones de Paso a Binario o Decimal simplificadas
+function DeNumeroABinario(Numero){
 	var SubNumero = parseInt(Numero);
     return SubNumero.toString(2);
 }
+function DeBinarioANumero(Numero){
+	var SubNumero = parseInt(Numero,2);
+    return SubNumero;
+}
+
+// A partir de aquí, todo esto es inutil, por tener simplificación abrebiada
 function NumberToBinary(Numero){    
     if( Numero > 1 ){
         var ResultadoBin = "";
@@ -114,7 +121,6 @@ function NumberToBinary(Numero){
     return ResultadoBin;
 }
 function BinarioANumero(NumeroBinario){
-    //return NumeroBinario.toString();
 if (typeof(NumeroBinario) == "string" ){
     var ResultadoNumerico = 0;
     var NumeroDerecha = "";
