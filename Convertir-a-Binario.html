@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<head>
+<html lang="ES" >
+<meta charset="UTF-8" >
+<meta name="author" content="Pol Flórez Viciana" >
+<meta name="owner" content="Pol Flórez Viciana" >
+<meta name="keywords" content="" >
+<title></title>
+<meta name="description" content="" >
+<meta name="robots" content="index, dofollow" >
+<style>
+	body {
+		background-color: rgb(0,0,0); text-align: center;
+	} 
+	h1 {
+		color: rgb(128,128,255); text-align: center; text-shadow: 0px 0px 25px green; margin: 0px;
+	}
+	h2 {
+		color: rgb(128,255,128); text-align: center; text-shadow: 0px 0px 25px white; margin: 0px;
+	}
+	h3 {
+		color: rgb(255,127,0); text-align: center; text-shadow: 0px 0px 25px white; margin: 0px;
+	}
+	p {
+		color: white; text-align: left;
+	}
+	a {
+		cursor: pointer;
+		background-color: rgb(64,64,255);
+		padding: 5px 5px 5px 5px;
+		border-radius: 25px;
+		color: yellow;
+		transition: all 0.8s linear;
+		border: 1px double white;
+	}
+	a:link { color: rgb(255,255,0); } 
+	a:visited { color: rgb(255,255,128); } 
+	a:hover { color: rgb(255,0,0); }
+
+	.MyInput {
+		cursor: pointer;
+		border-radius: 10px;
+		text-align: center; margin: 2px;
+	}
+	section {
+		vertical-align: text-top;
+		width: 92%; min-width: 420px; max-width: 960px; padding: 10px; 
+		background-color: rgb(32,32,32);
+		border-radius: 25px;	
+		position: absolute; 
+		top: 50%; left: 50%; 
+		transform: translate(-50%,-50%);
+		color: white;
+	}
+	
+</style>
+</head>
+<body>
+<center>
+	<h1>Convertir a Binario y a Decimal</h1>
+	<section>	
+		<h2>Introduzca el Número Binario o Decimal</h2>
+		<p>Introduzca el valor para convertirlo en binario o decimal</p>
+		<input type="number" id="ElInput" value="1010" />
+		<input type="button" id="ElButton1" class="MyInput" value="Convertir a Binario" onclick="ConvertirBinario()" />
+		<input type="button" id="ElButton2" class="MyInput" value="Convertir a Decimal" onclick="ConvertirDecimal()" />
+	</section>
+</center>	
+<script>
+function ConvertirBinario(){
+	var Texto = document.getElementById("ElInput").value;	
+	alert( NumeroABinario(Texto) );
+}
+function ConvertirDecimal(){     
+	var Texto = document.getElementById("ElInput").value;	
+	alert( BinarioANumero(Texto) );
+}
+function NumeroABinario(Numero){
+	var SubNumero = parseInt(Numero);
+    return SubNumero.toString(2);
+}
+function NumberToBinary(Numero){    
+    if( Numero > 1 ){
+        var ResultadoBin = "";
+        var ResTempo = 0;
+        var ResTempoStr = "";
+
+        while (Numero > 0){
+            ResTempo = Numero / 2;
+            ResTempoStr = "" + ResTempo;
+            if (CharsRight(ResTempoStr, 1) == "5"){
+                ResultadoBin =  "1" + ResultadoBin; 
+                Numero = ResTempo - 0.5;
+            }else{
+                ResultadoBin = "0" + ResultadoBin; 
+                Numero = ResTempo
+            }
+            if (Numero == 0){
+                ResultadoBin = "0" + ResultadoBin ; 
+                break;
+            }
+            if (Numero == 1){
+                ResultadoBin = "1" + ResultadoBin; 
+                break;
+            }
+            if(Numero == 0.50){
+                ResultadoBin = "1" + ResultadoBin;
+                break;
+            }
+        }
+    }else{
+        ResultadoBin = Numero;
+    }
+    return ResultadoBin;
+}
+function BinarioANumero(NumeroBinario){
+    //return NumeroBinario.toString();
+if (typeof(NumeroBinario) == "string" ){
+    var ResultadoNumerico = 0;
+    var NumeroDerecha = "";
+    var ResTempo = 0;
+
+        var Cuenta = 0;
+        while (NumeroBinario.length > 0){
+            NumeroDerecha = "" + CharsRight(NumeroBinario,1);
+			if (NumeroDerecha == "0"){
+                if (Cuenta == 0){
+                   ResTempo = 0;        
+                }else{
+                   ResTempo = 0;
+                }
+            }else{
+                if (Cuenta == 0){
+                   ResTempo = 1;
+                }else{
+                   ResTempo = Math.pow(2,Cuenta);
+                }
+
+            }
+            ResultadoNumerico = ResultadoNumerico + ResTempo;
+            if(NumeroBinario.length == 1){ break; }
+            NumeroBinario = CharsLeft(NumeroBinario, NumeroBinario.length - 1);
+            Cuenta++;
+        }
+
+        return ResultadoNumerico;
+    }    
+}
+function CharsLeft(TextChars , NumChars){
+    if ( typeof(TextChars) == "string" ){
+        if ( typeof(NumChars) == "number" ){
+           if (TextChars == ""){ exit(); }
+           if (TextChars.length >= NumChars && NumChars >= 1 ){
+               var Retorno = TextChars.slice(0, NumChars);
+               return Retorno;
+           }else{
+               return TextChars;
+           }
+        }
+    }    
+}
+
+function CharsRight(TextChars , NumChars){
+    if ( typeof(TextChars) == "string" ){
+        if ( typeof(NumChars) == "number" ){
+           if (TextChars == ""){ exit(); }
+           if (TextChars.length >= NumChars && NumChars >= 1 ){
+               var Retorno = TextChars.slice(TextChars.length - NumChars,TextChars.length);
+               return Retorno;
+           }else{
+               return TextChars;
+           }
+        }
+    }    
+}
+</script>
+</body>
+</html>
